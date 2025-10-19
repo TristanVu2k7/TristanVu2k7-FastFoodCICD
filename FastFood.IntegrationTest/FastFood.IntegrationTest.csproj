@@ -19,6 +19,11 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
   </ItemGroup>
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Assignment_NET104\Assignment_NET104.csproj" />
