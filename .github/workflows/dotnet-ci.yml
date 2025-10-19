@@ -2,11 +2,9 @@ name: .NET CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -22,10 +20,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: 🔹 Restore dependencies
-      run: dotnet restore ./FastFood.sln
+      run: dotnet restore "./Assignment_NET104.sln"
 
     - name: 🔹 Build project
-      run: dotnet build ./FastFood.sln --configuration Release --no-restore
+      run: dotnet build "./Assignment_NET104.sln" --configuration Release --no-restore
 
     - name: 🔹 Run tests
-      run: dotnet test ./FastFood.sln --no-restore --verbosity normal
+      run: dotnet test "./Assignment_NET104.sln" --no-restore --verbosity normal
