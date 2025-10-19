@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment_NET104", "Assign
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.UnitTests", "FastFood.UnitTests\FastFood.UnitTests.csproj", "{9D7C1F78-78F3-4413-8472-96C2428EF884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.IntergrationTest", "FastFood.IntergrationTest\FastFood.IntergrationTest.csproj", "{F1137A70-3699-4C59-9294-9432CE592631}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.IntegrationTest", "FastFood.IntergrationTest\FastFood.IntegrationTest.csproj", "{F1137A70-3699-4C59-9294-9432CE592631}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.UITest1", "FastFood.UITest1\FastFood.UITest1.csproj", "{F61447E3-3DC8-4D46-BFBA-EF06C3211184}"
 EndProject
