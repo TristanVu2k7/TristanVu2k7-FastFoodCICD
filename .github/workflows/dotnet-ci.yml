@@ -34,7 +34,7 @@ jobs:
         echo "🔍 Running tests..."
         dotnet restore "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj"
         dotnet build "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --configuration Release --no-restore
-        dotnet test "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --no-build --verbosity normal
+        dotnet test "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --configuration Release --verbosity normal
 
     - name: 📤 Upload Test Results
       if: success() || failure()
