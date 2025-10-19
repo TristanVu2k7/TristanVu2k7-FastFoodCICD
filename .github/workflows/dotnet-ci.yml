@@ -2,28 +2,30 @@ name: .NET CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: 🔹 Checkout code
+    - name: 🔹 Checkout source
       uses: actions/checkout@v4
 
-    - name: 🔹 Setup .NET SDK
+    - name: 🔹 Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # hoặc 7.0 nếu bạn dùng .NET 7
+        dotnet-version: 8.0.x
 
     - name: 🔹 Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./FastFood.sln
 
-    - name: 🔹 Build solution
-      run: dotnet build --no-restore --configuration Release
+    - name: 🔹 Build project
+      run: dotnet build ./FastFood.sln --configuration Release --no-restore
 
-    - name: 🔹 Run Unit Tests
-      run: dotnet test --no-build --verbosity normal
+    - name: 🔹 Run tests
+      run: dotnet test ./FastFood.sln --no-restore --verbosity normal
