@@ -29,11 +29,12 @@ jobs:
     - name: 🏗️ Build project
       run: dotnet build "./Assignment_NET104/Assignment_NET104.csproj" --configuration Release --no-restore
 
-    - name: 🧪 Run Tests (Unit + Integration)
-
-      run: dotnet test "./FastFood.IntegrationTest/FastFood.IntergrationTest.csproj" --no-build --verbosity normal
-
-      run: dotnet test "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --no-build --verbosity normal
+    - name: 🧪 Run Unit & Integration Tests
+      run: |
+        echo "🔍 Running tests..."
+        dotnet restore "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj"
+        dotnet build "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --configuration Release --no-restore
+        dotnet test "./FastFood.IntegrationTest/FastFood.IntegrationTest.csproj" --no-build --verbosity normal
 
     - name: 📤 Upload Test Results
       if: success() || failure()
