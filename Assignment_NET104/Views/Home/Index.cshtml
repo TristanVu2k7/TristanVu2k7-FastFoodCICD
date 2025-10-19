@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FoodItem>
+@using Assignment_NET104.Models
+@{
+    ViewData["Title"] = "Trang chủ";
+    var categories = ViewBag.Categories as IEnumerable<Category> ?? Enumerable.Empty<Category>();
+}
+
+<h1 class="mb-4">Thực đơn</h1>
+
+<!-- Form lọc -->
+<form method="get" class="mb-4">
+    <div class="row g-2">
+        <!-- Ô tìm kiếm -->
+        <div class="col-md-3">
+            <input type="text" name="search" class="form-control" placeholder="Tìm món ăn..."
+                   value="@Context.Request.Query["search"]" />
+        </div>
+
+        <!-- Chọn danh mục -->
+        <div class="col-md-3">
+            <select name="categoryId" class="form-select">
+                <option value="">-- Tất cả danh mục --</option>
+                @foreach (var cat in categories)
+                {
+                    <option value="@cat.Id"
+                            selected="@(Context.Request.Query["categoryId"] == cat.Id.ToString())">
+                        @cat.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Giá từ -->
+        <div class="col-md-2">
+            <input type="number" name="minPrice" class="form-control" placeholder="Giá từ"
+                   value="@Context.Request.Query["minPrice"]" />
+        </div>
+
+        <!-- Giá đến -->
+        <div class="col-md-2">
+            <input type="number" name="maxPrice" class="form-control" placeholder="Giá đến"
+                   value="@Context.Request.Query["maxPrice"]" />
+        </div>
+
+        <!-- Nút lọc -->
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+        </div>
+    </div>
+</form>
+
+<!-- Danh sách món ăn -->
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@item.ImagePath" class="card-img-top" alt="@item.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text text-muted">@item.Category?.Name</p>
+                        <p class="card-text fw-bold">@item.Price.ToString("N0") VNĐ</p>
+
+                        <a asp-controller="Food" asp-action="Details" asp-route-id="@item.Id"
+                           class="btn btn-outline-primary btn-sm">Chi tiết</a>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"
+                               class="btn btn-success btn-sm">Thêm vào giỏ</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                Không tìm thấy món ăn nào phù hợp.
+            </div>
+        </div>
+    }
+</div>

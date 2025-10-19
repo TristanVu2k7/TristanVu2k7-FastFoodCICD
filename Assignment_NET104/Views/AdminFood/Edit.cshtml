@@ -1,0 +1,113 @@
+﻿@model Assignment_NET104.Models.FoodItem
+@{
+    ViewData["Title"] = "Sửa món ăn";
+    var modelState = ViewData.ModelState;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Tên món <span class="text-danger">*</span></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Giá <span class="text-danger">*</span></label>
+        <div class="input-group">
+            <input asp-for="Price" class="form-control" type="number" min="0" step="1000" />
+            <span class="input-group-text">đ</span>
+        </div>
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImagePath" class="form-label">Link hình ảnh (URL) <span class="text-danger">*</span></label>
+        <input asp-for="ImagePath" class="form-control"
+               placeholder="https://example.com/image.jpg"
+               value="@(Model?.ImagePath ?? "")" />
+        <span asp-validation-for="ImagePath" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Mô tả</label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="IsAvailable" class="form-check-input" />
+        <label asp-for="IsAvailable" class="form-check-label">Sẵn có</label>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Danh mục <span class="text-danger">*</span></label>
+        <select asp-for="CategoryId"
+                asp-items="ViewBag.Categories"
+                class="form-select"
+                required
+                oninvalid="this.setCustomValidity('Vui lòng chọn danh mục')"
+                oninput="this.setCustomValidity('')">
+            <option value="">-- Chọn danh mục --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Cập nhật</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+
+    @if (!modelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <h5>Vui lòng sửa các lỗi sau:</h5>
+            <ul>
+                @foreach (var error in modelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Client-side validation cho URL ảnh
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const urlInput = document.getElementById('ImagePath');
+            if (!urlInput.value) {
+                e.preventDefault();
+                alert('Vui lòng nhập URL hình ảnh');
+                urlInput.focus();
+            } else if (!isValidUrl(urlInput.value)) {
+                e.preventDefault();
+                alert('URL hình ảnh không hợp lệ');
+                urlInput.focus();
+            }
+        });
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+        // Fix lỗi validation không hiển thị đúng
+        $(document).ready(function() {
+            $("form").removeData("validator");
+            $("form").removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse("form");
+        });
+    </script>
+}

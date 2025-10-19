@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OrderDetail>
+@{
+    ViewData["Title"] = "Xác nhận đặt món";
+}
+
+<h1>PlaceOrder</h1>
+
+<form asp-action="PlaceOrder" method="post">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Món ăn</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FoodItem.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("N0") VNĐ</td>
+                    <td>@(item.Price* item.Quantity).ToString("N0") VNĐ</td>
+                    <input type="hidden" name="items[@Model.ToList().IndexOf(item)].FoodItemId" value="@item.FoodItemId" />
+                    <input type="hidden" name="items[@Model.ToList().IndexOf(item)].Quantity" value="@item.Quantity" />
+                    <input type="hidden" name="items[@Model.ToList().IndexOf(item)].Price" value="@item.Price" />
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Tổng cộng: @Model.Sum(i => i.Price * i.Quantity).ToString("N0") VNĐ</h4>
+
+    <button type="submit" class="btn btn-success">Đặt hàng</button>
+</form>

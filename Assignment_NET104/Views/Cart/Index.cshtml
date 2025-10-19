@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Assignment_NET104.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+
+}
+
+<h2>Giỏ hàng</h2>
+
+
+@if (!Model.Any())
+{
+    <p>Giỏ hàng trống!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên món</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FoodItem?.Name </td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>@((item.Price * item.Quantity).ToString("N0")) đ</td>
+
+                    <td>
+                        <form asp-action="Remove" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Tổng cộng: @ViewBag.Total.ToString("N0") đ</h4>
+
+    <form asp-action="Checkout" method="post">
+        <button type="submit" class="btn btn-success">Thanh toán</button>
+    </form>
+}

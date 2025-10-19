@@ -1,0 +1,32 @@
+﻿@model List<CartItem>
+
+<h2>Giỏ hàng</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Giỏ hàng trống.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên món</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price* item.Quantity) đ</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,5 @@
+|--------------------[Cách xuất database (bacpac) Cho người ngu]------------- |
+|step 1: nhấn chuột phải vào database, chọn Import Data-tier			|
+|step 2: nhấn next, chọn file bacpac mới nhất "Asm_NET104_SOF3032.bacpac"	|
+|step 3: đổi tên database thành FastFoodDB và ấn finish				|
+|---------------------------END-------------------------------------------- |

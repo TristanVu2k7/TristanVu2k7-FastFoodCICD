@@ -1,0 +1,12 @@
+﻿@model Assignment_NET104.Models.FoodItem
+@{
+    ViewData["Title"] = "Xóa món ăn thành công";
+}
+<div class="container mt-4">
+    <div class="alert alert-success">
+		<h4 class="alert-heading">Xóa món ăn thành công!</h4>
+        <p>Món ăn<strong>@Model.Name</strong>đã được xóa khỏi hệ thông</p>
+    </div>
+    <a asp-action="Index" class="btn btn-primary">Quay lại danh sách món ăn</a>
+</div>
+

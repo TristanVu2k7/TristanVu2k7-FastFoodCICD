@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Xác thực Email";
+}
+<h2>@ViewData["Title"]</h2>
+<p>Chúng tôi đã gửi OTP đến email: <b>@ViewBag.Email</b></p>
+
+<form asp-action="ConfirmEmail" method="get">
+    <input type="hidden" name="userId" value="@ViewBag.UserId" />
+    <div class="form-group">
+        <label>Nhập mã OTP</label>
+        <input type="text" name="token" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Xác nhận</button>
+</form>

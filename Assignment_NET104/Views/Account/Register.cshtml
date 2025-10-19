@@ -1,0 +1,93 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<!-- Hiển thị tất cả lỗi ModelState -->
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Register" method="post" class="row g-3">
+    @Html.AntiForgeryToken()
+    <div class="col-md-6">
+        <label asp-for="FullName" class="form-label">Họ và tên</label>
+        <input asp-for="FullName" class="form-control" value="@Model?.FullName" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Address" class="form-label">Địa chỉ</label>
+        <input asp-for="Address" class="form-control" value="@Model?.Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Email" class="form-label">Email</label>
+        <div class="input-group">
+            <input asp-for="Email" class="form-control" id="Email" />
+            <button type="button" id="btnSendOtpEmail" class="btn btn-secondary">Gửi OTP</button>
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+        <input asp-for="PhoneNumber" class="form-control" placeholder="+84901234567" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="OtpCode" class="form-label">Mã OTP</label>
+        <input asp-for="OtpCode" class="form-control" />
+        <span asp-validation-for="OtpCode" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Password" class="form-label">Mật khẩu</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Role" class="form-label">Chọn quyền</label>
+        <select asp-for="Role" class="form-select">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+            <option value="Customer">Customer</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="ConfirmPassword" class="form-label">Xác nhận mật khẩu</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+    </div>
+</form>
+
+<script>
+    document.getElementById("btnSendOtpEmail").addEventListener("click", function () {
+        const email = document.getElementById("Email").value.trim();
+        if (!email) {
+            alert("Vui lòng nhập email");
+            return;
+        }
+
+        fetch('/Account/SendOtp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: 'email=' + encodeURIComponent(email)
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(() => alert("Có lỗi khi gửi OTP"));
+    });
+</script>

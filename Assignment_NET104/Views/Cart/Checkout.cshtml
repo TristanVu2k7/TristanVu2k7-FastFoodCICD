@@ -1,0 +1,44 @@
+﻿@model List<Assignment_NET104.Models.CartItem>
+@{
+    ViewData["Title"] = "Xác nhận thanh toán";
+}
+
+<h1>Xác nhận thanh toán</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">Giỏ hàng của bạn hiện đang trống.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên món</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FoodItem?.Name</td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price* item.Quantity).ToString("N0") đ</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-end mb-3">
+        <strong>Tổng tiền: @(Model.Sum(i => i.Price * i.Quantity).ToString("N0")) đ</strong>
+    </div>
+
+    <form asp-action="ConfirmCheckout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
+    </form>
+}

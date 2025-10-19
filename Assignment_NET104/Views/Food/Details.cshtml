@@ -1,0 +1,25 @@
+﻿@using System.Security.Claims
+@model FoodItem
+@{
+    ViewData["Title"] = "Chi tiết món ăn";
+}
+
+<h2>@Model.Name</h2>
+@if (!string.IsNullOrEmpty(Model.ImagePath))
+{
+    <img src="@Model.ImagePath" alt="@Model.Name" style="max-width:300px;max-height:200px;" />
+}
+<p>Giá: @Model.Price.ToString("N0") VNĐ</p>
+<p>Danh mục: @Model.Category?.Name</p>
+
+<a asp-page="/Food/Index" class="btn btn-secondary">Quay lại thực đơn</a>
+
+@* Thêm nút đặt hàng nếu người dùng là Customer 
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Customer") || User.Claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Customer")))
+{
+    <form asp-controller="Cart" asp-action="Add" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-success">Đặt hàng</button>
+    </form>
+}
+*@

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Trang khách hàng";
+}
+
+<h2>Xin chào, @Model.UserName 👋</h2>
+
+<div class="list-group mt-4">
+    <a asp-controller="Customers" asp-action="Profile" class="list-group-item list-group-item-action">
+        <i class="bi bi-person-circle"></i> Hồ sơ cá nhân
+    </a>
+
+    <a asp-controller="Customers" asp-action="OrderHistory" class="list-group-item list-group-item-action">
+        <i class="bi bi-clock-history"></i> Lịch sử đơn hàng
+    </a>
+
+    <a asp-controller="Customers" asp-action="TrackOrder" class="list-group-item list-group-item-action">
+        <i class="bi bi-truck"></i> Theo dõi đơn hàng
+    </a>
+</div>

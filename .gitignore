@@ -1,0 +1,8 @@
+# Ignore secrets & configs
+appsettings.json
+appsettings.Development.json
+*.user
+*.vs/
+bin/
+obj/
+vs/
