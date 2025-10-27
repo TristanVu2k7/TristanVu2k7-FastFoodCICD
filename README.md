@@ -57,4 +57,4 @@ lưu file thứ 2 ở /FastFood.IntergrationTest/appsettings.json
 
 }
 ```
-Link repo gốc : 
+Link repo gốc : [Google Drive](https://drive.google.com/file/d/1BSNtXwUBxSPg43liZRfzyiDn5wuYLeOW/view)
