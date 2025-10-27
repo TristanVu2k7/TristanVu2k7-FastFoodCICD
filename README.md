@@ -9,6 +9,7 @@ Phần appsetings.json thì tự điền Server SQL của bạn sau đó tạo m
 tiếp tục tạo trình gửi mã OTP Email lấy Port, điền Email của bạn vào SenderName là FastFood, SenderEmail và Username sử dụng Email thật và điền password đã tạo
 
 Tạo appsetting.json 
+```
 lưu vào file Assignment_NET104/Assignment_NET104/appsettings.json
 {
   "ConnectionStrings": {
@@ -37,8 +38,9 @@ lưu vào file Assignment_NET104/Assignment_NET104/appsettings.json
 
   "AllowedHosts": "*"
 }
+```
 lưu file thứ 2 ở /FastFood.IntergrationTest/appsettings.json
-
+```
 {
   "EmailSettings": {
     "SmtpServer": "smtp.gmail.com",
@@ -50,3 +52,4 @@ lưu file thứ 2 ở /FastFood.IntergrationTest/appsettings.json
   }
 
 }
+```
