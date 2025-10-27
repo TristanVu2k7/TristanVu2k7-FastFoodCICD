@@ -30,11 +30,15 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // =================== Authentication: Google ===================
 builder.Services.AddAuthentication()
-    .AddGoogle(googleOptions =>
+    .AddGoogle(options =>
     {
-        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-        googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"]
+                           ?? Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]
+                               ?? Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET");
+        options.CallbackPath = "/signin-google";
     });
+
 
 // =================== MVC + Session ===================
 builder.Services.AddControllersWithViews();
