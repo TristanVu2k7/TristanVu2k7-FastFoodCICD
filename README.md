@@ -12,8 +12,9 @@ Phần appsetings.json thì tự điền Server SQL của bạn sau đó tạo m
 tiếp tục tạo trình gửi mã OTP Email lấy Port, điền Email của bạn vào SenderName là FastFood, SenderEmail và Username sử dụng Email thật và điền password đã tạo
 
 Tạo appsetting.json 
-```
 lưu vào file Assignment_NET104/Assignment_NET104/appsettings.json
+```
+
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=.;Database=FastFoodDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;"
