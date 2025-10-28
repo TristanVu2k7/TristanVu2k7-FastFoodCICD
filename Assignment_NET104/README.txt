@@ -45,7 +45,7 @@ lưu file thứ 2 ở /FastFood.IntergrationTest/appsettings.json
     "SenderName": "FastFood",
     "SenderEmail": "namvutran20072@gmail.com",
     "Username": "namvutran20072@gmail.com",
-    "Password": "xlcl xfar snsz lbzw" // App password
+    "Password": "evhk xhqx faxi cuxo" // App password
   }
 
 }
