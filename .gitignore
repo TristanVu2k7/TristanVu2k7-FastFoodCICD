@@ -1,7 +1,4 @@
 # Ignore secrets & configs
-appsettings.json
-appsettings.Development.json
-appsettings.json
 *.user
 *.vs/
 bin/
